@@ -1,0 +1,75 @@
+{%- extends "basic/layout.html" %}
+ 
+{% set css_files = css_files + ["_static/UItoTop/css/ui.totop.css"] %}
+<!-- jquery --> 
+        {% set script_files = script_files + ["_static/UItoTop/js/jquery-1.7.2.min.js"] %}      
+        <!-- easing plugin ( optional ) -->
+        {% set script_files = script_files + ["_static/UItoTop/js/easing.js"] %} 
+         <!-- UItoTop plugin -->
+         {% set script_files = script_files + ["_static/UItoTop/js/jquery.ui.totop.min.js"] %} 
+        <!-- Starting the plugin -->
+ 
+{%- block extrahead %}
+  {{ super() }}
+  {% if theme_touch_icon %}
+  <link rel="apple-touch-icon" href="{{ pathto('_static/' ~ theme_touch_icon, 1) }}" />
+  {% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+{% endblock %}
+{%- block relbar2 %}{% endblock %}
+{% block header %}
+  {{ super() }}
+  {% if pagename == 'index' %}
+  <div class=indexwrapper>
+  {% endif %}
+    
+{% endblock %}
+
+{%- block content %}
+  {%- block sidebar1 %} {# possible location for sidebar #} {% endblock %}
+
+    <div class="document">
+  {%- block document %}
+      <div class="documentwrapper">
+      {%- if render_sidebar %}
+        <div class="bodywrapper">
+      {%- endif %}
+          <div class="body">
+            {% block body %} {% endblock %}
+
+            {% include "duoshuo.html" %}
+            {% include "UItoTop.html" %}
+            
+          </div>
+      {%- if render_sidebar %}
+        </div>
+      {%- endif %}
+      </div>
+  {%- endblock %}
+
+  {%- block sidebar2 %}{{ sidebar() }}{% endblock %}
+      <div class="clearer"></div>
+    </div>
+{%- endblock %}
+
+
+
+{%- block footer %}
+
+  <div class="footer">
+    &copy; Copyright {{ copyright }}.
+  </div>
+  {%- block innerfooter %}{%- endblock %}
+  {% if pagename == 'index' %}
+  </div>
+  
+  {% endif %}
+{%- endblock %}
+
+        
+
+
+           
+
+
+        
